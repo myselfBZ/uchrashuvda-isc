@@ -11,7 +11,7 @@ service UserService {
   rpc Create(CreateUserRequest) returns (User);
   rpc GetByID(GetByIDRequest) returns (User); 
   rpc GetByEmail(GetByEmailRequest) returns (User); 
-  rpc VerifyUserRequest(VerifyUserRequest) returns (User);
+  rpc Verify(VerifyUserRequest) returns (User);
 }
 
 message GetByIDRequest {
