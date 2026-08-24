@@ -253,7 +253,6 @@ type User struct {
 	Username      string                 `protobuf:"bytes,3,opt,name=username,proto3" json:"username,omitempty"`
 	FirstName     string                 `protobuf:"bytes,4,opt,name=first_name,json=firstName,proto3" json:"first_name,omitempty"`
 	LastName      string                 `protobuf:"bytes,5,opt,name=last_name,json=lastName,proto3" json:"last_name,omitempty"`
-	PasswordHash  string                 `protobuf:"bytes,6,opt,name=password_hash,json=passwordHash,proto3" json:"password_hash,omitempty"`
 	BirthDate     *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=birth_date,json=birthDate,proto3" json:"birth_date,omitempty"`
 	Location      *Location              `protobuf:"bytes,8,opt,name=location,proto3" json:"location,omitempty"`
 	Email         string                 `protobuf:"bytes,9,opt,name=email,proto3" json:"email,omitempty"`
@@ -326,13 +325,6 @@ func (x *User) GetLastName() string {
 	return ""
 }
 
-func (x *User) GetPasswordHash() string {
-	if x != nil {
-		return x.PasswordHash
-	}
-	return ""
-}
-
 func (x *User) GetBirthDate() *timestamppb.Timestamp {
 	if x != nil {
 		return x.BirthDate
@@ -374,15 +366,14 @@ const file_user_service_proto_rawDesc = "" +
 	"\rpassword_text\x18\x04 \x01(\tR\fpasswordText\x12\x14\n" +
 	"\x05email\x18\x05 \x01(\tR\x05email\x129\n" +
 	"\n" +
-	"birth_date\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\tbirthDate\"\xbb\x02\n" +
+	"birth_date\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\tbirthDate\"\x96\x02\n" +
 	"\x04User\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12!\n" +
 	"\fpicture_path\x18\x02 \x01(\tR\vpicturePath\x12\x1a\n" +
 	"\busername\x18\x03 \x01(\tR\busername\x12\x1d\n" +
 	"\n" +
 	"first_name\x18\x04 \x01(\tR\tfirstName\x12\x1b\n" +
-	"\tlast_name\x18\x05 \x01(\tR\blastName\x12#\n" +
-	"\rpassword_hash\x18\x06 \x01(\tR\fpasswordHash\x129\n" +
+	"\tlast_name\x18\x05 \x01(\tR\blastName\x129\n" +
 	"\n" +
 	"birth_date\x18\a \x01(\v2\x1a.google.protobuf.TimestampR\tbirthDate\x122\n" +
 	"\blocation\x18\b \x01(\v2\x16.user_service.LocationR\blocation\x12\x14\n" +
