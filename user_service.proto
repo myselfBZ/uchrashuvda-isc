@@ -11,10 +11,16 @@ service UserService {
   rpc Create(CreateUserRequest) returns (User);
   rpc GetByID(GetByIDRequest) returns (User); 
   rpc GetByEmail(GetByEmailRequest) returns (User); 
+  rpc VerifyUserRequest(VerifyUserRequest) returns (User);
 }
 
 message GetByIDRequest {
   string id = 1;
+}
+
+message VerifyUserRequest {
+  string email = 1;
+  string password = 2;
 }
 
 message GetByEmailRequest {
