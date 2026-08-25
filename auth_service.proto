@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+package auth_service;
+
+option go_package = "github.com/myselfBZ/uchrashuvda-isc/auth";
+
+import "user_service.proto";
+import "google/protobuf/timestamp.proto";
+
+service AuthService {
+  rpc Login(LoginRequest) returns (UserIdentityResponse);
+  rpc Register(RegisterRequest) returns (UserIdentityResponse);
+  rpc RefreshToken(RefreshTokenRequest) returns (UserIdentityResponse);
+}
+
+message RefreshTokenRequest {
+  string resfresh_token = 1;
+}
+
+
+message LoginRequest {
+  string email = 1;
+  string password = 2;
+}
+
+message UserIdentityResponse {
+  string access_token = 1;
+  string refresh_token = 2;
+  user_service.User user = 3;
+}
+
+
+message RegisterRequest {
+  string username = 1;
+  string first_name = 2;
+  string last_name = 3;
+  string password_text = 4;
+  string email         = 5;
+  google.protobuf.Timestamp birth_date = 6;
+}
