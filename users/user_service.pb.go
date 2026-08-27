@@ -222,6 +222,7 @@ type CreateUserRequest struct {
 	PasswordText  string                 `protobuf:"bytes,4,opt,name=password_text,json=passwordText,proto3" json:"password_text,omitempty"`
 	Email         string                 `protobuf:"bytes,5,opt,name=email,proto3" json:"email,omitempty"`
 	BirthDate     *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=birth_date,json=birthDate,proto3" json:"birth_date,omitempty"`
+	Location      *Location              `protobuf:"bytes,7,opt,name=location,proto3" json:"location,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -294,6 +295,13 @@ func (x *CreateUserRequest) GetEmail() string {
 func (x *CreateUserRequest) GetBirthDate() *timestamppb.Timestamp {
 	if x != nil {
 		return x.BirthDate
+	}
+	return nil
+}
+
+func (x *CreateUserRequest) GetLocation() *Location {
+	if x != nil {
+		return x.Location
 	}
 	return nil
 }
@@ -412,7 +420,7 @@ const file_user_service_proto_rawDesc = "" +
 	"\x05email\x18\x01 \x01(\tR\x05email\".\n" +
 	"\bLocation\x12\x10\n" +
 	"\x03lat\x18\x01 \x01(\x01R\x03lat\x12\x10\n" +
-	"\x03lng\x18\x02 \x01(\x01R\x03lng\"\xe1\x01\n" +
+	"\x03lng\x18\x02 \x01(\x01R\x03lng\"\x95\x02\n" +
 	"\x11CreateUserRequest\x12\x1a\n" +
 	"\busername\x18\x01 \x01(\tR\busername\x12\x1d\n" +
 	"\n" +
@@ -421,7 +429,8 @@ const file_user_service_proto_rawDesc = "" +
 	"\rpassword_text\x18\x04 \x01(\tR\fpasswordText\x12\x14\n" +
 	"\x05email\x18\x05 \x01(\tR\x05email\x129\n" +
 	"\n" +
-	"birth_date\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\tbirthDate\"\x96\x02\n" +
+	"birth_date\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\tbirthDate\x122\n" +
+	"\blocation\x18\a \x01(\v2\x16.user_service.LocationR\blocation\"\x96\x02\n" +
 	"\x04User\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12!\n" +
 	"\fpicture_path\x18\x02 \x01(\tR\vpicturePath\x12\x1a\n" +
@@ -464,21 +473,22 @@ var file_user_service_proto_goTypes = []any{
 }
 var file_user_service_proto_depIdxs = []int32{
 	6, // 0: user_service.CreateUserRequest.birth_date:type_name -> google.protobuf.Timestamp
-	6, // 1: user_service.User.birth_date:type_name -> google.protobuf.Timestamp
-	3, // 2: user_service.User.location:type_name -> user_service.Location
-	4, // 3: user_service.UserService.Create:input_type -> user_service.CreateUserRequest
-	0, // 4: user_service.UserService.GetByID:input_type -> user_service.GetByIDRequest
-	2, // 5: user_service.UserService.GetByEmail:input_type -> user_service.GetByEmailRequest
-	1, // 6: user_service.UserService.Verify:input_type -> user_service.VerifyUserRequest
-	5, // 7: user_service.UserService.Create:output_type -> user_service.User
-	5, // 8: user_service.UserService.GetByID:output_type -> user_service.User
-	5, // 9: user_service.UserService.GetByEmail:output_type -> user_service.User
-	5, // 10: user_service.UserService.Verify:output_type -> user_service.User
-	7, // [7:11] is the sub-list for method output_type
-	3, // [3:7] is the sub-list for method input_type
-	3, // [3:3] is the sub-list for extension type_name
-	3, // [3:3] is the sub-list for extension extendee
-	0, // [0:3] is the sub-list for field type_name
+	3, // 1: user_service.CreateUserRequest.location:type_name -> user_service.Location
+	6, // 2: user_service.User.birth_date:type_name -> google.protobuf.Timestamp
+	3, // 3: user_service.User.location:type_name -> user_service.Location
+	4, // 4: user_service.UserService.Create:input_type -> user_service.CreateUserRequest
+	0, // 5: user_service.UserService.GetByID:input_type -> user_service.GetByIDRequest
+	2, // 6: user_service.UserService.GetByEmail:input_type -> user_service.GetByEmailRequest
+	1, // 7: user_service.UserService.Verify:input_type -> user_service.VerifyUserRequest
+	5, // 8: user_service.UserService.Create:output_type -> user_service.User
+	5, // 9: user_service.UserService.GetByID:output_type -> user_service.User
+	5, // 10: user_service.UserService.GetByEmail:output_type -> user_service.User
+	5, // 11: user_service.UserService.Verify:output_type -> user_service.User
+	8, // [8:12] is the sub-list for method output_type
+	4, // [4:8] is the sub-list for method input_type
+	4, // [4:4] is the sub-list for extension type_name
+	4, // [4:4] is the sub-list for extension extendee
+	0, // [0:4] is the sub-list for field type_name
 }
 
 func init() { file_user_service_proto_init() }
