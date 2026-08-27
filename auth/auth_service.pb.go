@@ -187,6 +187,7 @@ type RegisterRequest struct {
 	PasswordText  string                 `protobuf:"bytes,4,opt,name=password_text,json=passwordText,proto3" json:"password_text,omitempty"`
 	Email         string                 `protobuf:"bytes,5,opt,name=email,proto3" json:"email,omitempty"`
 	BirthDate     *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=birth_date,json=birthDate,proto3" json:"birth_date,omitempty"`
+	Location      *users.Location        `protobuf:"bytes,7,opt,name=location,proto3" json:"location,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -263,6 +264,13 @@ func (x *RegisterRequest) GetBirthDate() *timestamppb.Timestamp {
 	return nil
 }
 
+func (x *RegisterRequest) GetLocation() *users.Location {
+	if x != nil {
+		return x.Location
+	}
+	return nil
+}
+
 var File_auth_service_proto protoreflect.FileDescriptor
 
 const file_auth_service_proto_rawDesc = "" +
@@ -276,7 +284,7 @@ const file_auth_service_proto_rawDesc = "" +
 	"\x14UserIdentityResponse\x12!\n" +
 	"\faccess_token\x18\x01 \x01(\tR\vaccessToken\x12#\n" +
 	"\rrefresh_token\x18\x02 \x01(\tR\frefreshToken\x12&\n" +
-	"\x04user\x18\x03 \x01(\v2\x12.user_service.UserR\x04user\"\xdf\x01\n" +
+	"\x04user\x18\x03 \x01(\v2\x12.user_service.UserR\x04user\"\x93\x02\n" +
 	"\x0fRegisterRequest\x12\x1a\n" +
 	"\busername\x18\x01 \x01(\tR\busername\x12\x1d\n" +
 	"\n" +
@@ -285,7 +293,8 @@ const file_auth_service_proto_rawDesc = "" +
 	"\rpassword_text\x18\x04 \x01(\tR\fpasswordText\x12\x14\n" +
 	"\x05email\x18\x05 \x01(\tR\x05email\x129\n" +
 	"\n" +
-	"birth_date\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\tbirthDate2\xfc\x01\n" +
+	"birth_date\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\tbirthDate\x122\n" +
+	"\blocation\x18\a \x01(\v2\x16.user_service.LocationR\blocation2\xfc\x01\n" +
 	"\vAuthService\x12G\n" +
 	"\x05Login\x12\x1a.auth_service.LoginRequest\x1a\".auth_service.UserIdentityResponse\x12M\n" +
 	"\bRegister\x12\x1d.auth_service.RegisterRequest\x1a\".auth_service.UserIdentityResponse\x12U\n" +
@@ -311,21 +320,23 @@ var file_auth_service_proto_goTypes = []any{
 	(*RegisterRequest)(nil),       // 3: auth_service.RegisterRequest
 	(*users.User)(nil),            // 4: user_service.User
 	(*timestamppb.Timestamp)(nil), // 5: google.protobuf.Timestamp
+	(*users.Location)(nil),        // 6: user_service.Location
 }
 var file_auth_service_proto_depIdxs = []int32{
 	4, // 0: auth_service.UserIdentityResponse.user:type_name -> user_service.User
 	5, // 1: auth_service.RegisterRequest.birth_date:type_name -> google.protobuf.Timestamp
-	1, // 2: auth_service.AuthService.Login:input_type -> auth_service.LoginRequest
-	3, // 3: auth_service.AuthService.Register:input_type -> auth_service.RegisterRequest
-	0, // 4: auth_service.AuthService.RefreshToken:input_type -> auth_service.RefreshTokenRequest
-	2, // 5: auth_service.AuthService.Login:output_type -> auth_service.UserIdentityResponse
-	2, // 6: auth_service.AuthService.Register:output_type -> auth_service.UserIdentityResponse
-	2, // 7: auth_service.AuthService.RefreshToken:output_type -> auth_service.UserIdentityResponse
-	5, // [5:8] is the sub-list for method output_type
-	2, // [2:5] is the sub-list for method input_type
-	2, // [2:2] is the sub-list for extension type_name
-	2, // [2:2] is the sub-list for extension extendee
-	0, // [0:2] is the sub-list for field type_name
+	6, // 2: auth_service.RegisterRequest.location:type_name -> user_service.Location
+	1, // 3: auth_service.AuthService.Login:input_type -> auth_service.LoginRequest
+	3, // 4: auth_service.AuthService.Register:input_type -> auth_service.RegisterRequest
+	0, // 5: auth_service.AuthService.RefreshToken:input_type -> auth_service.RefreshTokenRequest
+	2, // 6: auth_service.AuthService.Login:output_type -> auth_service.UserIdentityResponse
+	2, // 7: auth_service.AuthService.Register:output_type -> auth_service.UserIdentityResponse
+	2, // 8: auth_service.AuthService.RefreshToken:output_type -> auth_service.UserIdentityResponse
+	6, // [6:9] is the sub-list for method output_type
+	3, // [3:6] is the sub-list for method input_type
+	3, // [3:3] is the sub-list for extension type_name
+	3, // [3:3] is the sub-list for extension extendee
+	0, // [0:3] is the sub-list for field type_name
 }
 
 func init() { file_auth_service_proto_init() }

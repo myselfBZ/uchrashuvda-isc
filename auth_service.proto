@@ -37,4 +37,5 @@ message RegisterRequest {
   string password_text = 4;
   string email         = 5;
   google.protobuf.Timestamp birth_date = 6;
+  user_service.Location location = 7;
 }
