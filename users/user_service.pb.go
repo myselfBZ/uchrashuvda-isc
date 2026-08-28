@@ -414,6 +414,7 @@ type UpdateProfileInfoRequest struct {
 	Username      *string                `protobuf:"bytes,3,opt,name=username,proto3,oneof" json:"username,omitempty"`
 	PicturePath   *string                `protobuf:"bytes,4,opt,name=picture_path,json=picturePath,proto3,oneof" json:"picture_path,omitempty"`
 	BirthDate     *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=birth_date,json=birthDate,proto3,oneof" json:"birth_date,omitempty"`
+	Id            string                 `protobuf:"bytes,8,opt,name=id,proto3" json:"id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -483,6 +484,13 @@ func (x *UpdateProfileInfoRequest) GetBirthDate() *timestamppb.Timestamp {
 	return nil
 }
 
+func (x *UpdateProfileInfoRequest) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
 var File_user_service_proto protoreflect.FileDescriptor
 
 const file_user_service_proto_rawDesc = "" +
@@ -518,7 +526,7 @@ const file_user_service_proto_rawDesc = "" +
 	"\n" +
 	"birth_date\x18\a \x01(\v2\x1a.google.protobuf.TimestampR\tbirthDate\x122\n" +
 	"\blocation\x18\b \x01(\v2\x16.user_service.LocationR\blocation\x12\x14\n" +
-	"\x05email\x18\t \x01(\tR\x05email\"\xb3\x02\n" +
+	"\x05email\x18\t \x01(\tR\x05email\"\xc3\x02\n" +
 	"\x18UpdateProfileInfoRequest\x12\"\n" +
 	"\n" +
 	"first_name\x18\x01 \x01(\tH\x00R\tfirstName\x88\x01\x01\x12 \n" +
@@ -526,7 +534,8 @@ const file_user_service_proto_rawDesc = "" +
 	"\busername\x18\x03 \x01(\tH\x02R\busername\x88\x01\x01\x12&\n" +
 	"\fpicture_path\x18\x04 \x01(\tH\x03R\vpicturePath\x88\x01\x01\x12>\n" +
 	"\n" +
-	"birth_date\x18\a \x01(\v2\x1a.google.protobuf.TimestampH\x04R\tbirthDate\x88\x01\x01B\r\n" +
+	"birth_date\x18\a \x01(\v2\x1a.google.protobuf.TimestampH\x04R\tbirthDate\x88\x01\x01\x12\x0e\n" +
+	"\x02id\x18\b \x01(\tR\x02idB\r\n" +
 	"\v_first_nameB\f\n" +
 	"\n" +
 	"_last_nameB\v\n" +

@@ -61,4 +61,6 @@ message UpdateProfileInfoRequest {
   optional string username = 3;
   optional string picture_path = 4;
   optional google.protobuf.Timestamp birth_date = 7;
+
+  string id = 8;
 }
