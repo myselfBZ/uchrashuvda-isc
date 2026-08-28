@@ -11,6 +11,7 @@ import (
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
+	emptypb "google.golang.org/protobuf/types/known/emptypb"
 )
 
 // This is a compile-time assertion to ensure that this generated file
@@ -19,10 +20,11 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	UserService_Create_FullMethodName     = "/user_service.UserService/Create"
-	UserService_GetByID_FullMethodName    = "/user_service.UserService/GetByID"
-	UserService_GetByEmail_FullMethodName = "/user_service.UserService/GetByEmail"
-	UserService_Verify_FullMethodName     = "/user_service.UserService/Verify"
+	UserService_Create_FullMethodName            = "/user_service.UserService/Create"
+	UserService_GetByID_FullMethodName           = "/user_service.UserService/GetByID"
+	UserService_GetByEmail_FullMethodName        = "/user_service.UserService/GetByEmail"
+	UserService_Verify_FullMethodName            = "/user_service.UserService/Verify"
+	UserService_UpdateProfileInfo_FullMethodName = "/user_service.UserService/UpdateProfileInfo"
 )
 
 // UserServiceClient is the client API for UserService service.
@@ -33,6 +35,7 @@ type UserServiceClient interface {
 	GetByID(ctx context.Context, in *GetByIDRequest, opts ...grpc.CallOption) (*User, error)
 	GetByEmail(ctx context.Context, in *GetByEmailRequest, opts ...grpc.CallOption) (*User, error)
 	Verify(ctx context.Context, in *VerifyUserRequest, opts ...grpc.CallOption) (*User, error)
+	UpdateProfileInfo(ctx context.Context, in *UpdateProfileInfoRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
 
 type userServiceClient struct {
@@ -83,6 +86,16 @@ func (c *userServiceClient) Verify(ctx context.Context, in *VerifyUserRequest, o
 	return out, nil
 }
 
+func (c *userServiceClient) UpdateProfileInfo(ctx context.Context, in *UpdateProfileInfoRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, UserService_UpdateProfileInfo_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // UserServiceServer is the server API for UserService service.
 // All implementations must embed UnimplementedUserServiceServer
 // for forward compatibility.
@@ -91,6 +104,7 @@ type UserServiceServer interface {
 	GetByID(context.Context, *GetByIDRequest) (*User, error)
 	GetByEmail(context.Context, *GetByEmailRequest) (*User, error)
 	Verify(context.Context, *VerifyUserRequest) (*User, error)
+	UpdateProfileInfo(context.Context, *UpdateProfileInfoRequest) (*emptypb.Empty, error)
 	mustEmbedUnimplementedUserServiceServer()
 }
 
@@ -112,6 +126,9 @@ func (UnimplementedUserServiceServer) GetByEmail(context.Context, *GetByEmailReq
 }
 func (UnimplementedUserServiceServer) Verify(context.Context, *VerifyUserRequest) (*User, error) {
 	return nil, status.Error(codes.Unimplemented, "method Verify not implemented")
+}
+func (UnimplementedUserServiceServer) UpdateProfileInfo(context.Context, *UpdateProfileInfoRequest) (*emptypb.Empty, error) {
+	return nil, status.Error(codes.Unimplemented, "method UpdateProfileInfo not implemented")
 }
 func (UnimplementedUserServiceServer) mustEmbedUnimplementedUserServiceServer() {}
 func (UnimplementedUserServiceServer) testEmbeddedByValue()                     {}
@@ -206,6 +223,24 @@ func _UserService_Verify_Handler(srv interface{}, ctx context.Context, dec func(
 	return interceptor(ctx, in, info, handler)
 }
 
+func _UserService_UpdateProfileInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateProfileInfoRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServiceServer).UpdateProfileInfo(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UserService_UpdateProfileInfo_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServiceServer).UpdateProfileInfo(ctx, req.(*UpdateProfileInfoRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // UserService_ServiceDesc is the grpc.ServiceDesc for UserService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -228,6 +263,10 @@ var UserService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Verify",
 			Handler:    _UserService_Verify_Handler,
+		},
+		{
+			MethodName: "UpdateProfileInfo",
+			Handler:    _UserService_UpdateProfileInfo_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

@@ -9,6 +9,7 @@ package users
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	emptypb "google.golang.org/protobuf/types/known/emptypb"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 	reflect "reflect"
 	sync "sync"
@@ -406,11 +407,87 @@ func (x *User) GetEmail() string {
 	return ""
 }
 
+type UpdateProfileInfoRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	FirstName     *string                `protobuf:"bytes,1,opt,name=first_name,json=firstName,proto3,oneof" json:"first_name,omitempty"`
+	LastName      *string                `protobuf:"bytes,2,opt,name=last_name,json=lastName,proto3,oneof" json:"last_name,omitempty"`
+	Username      *string                `protobuf:"bytes,3,opt,name=username,proto3,oneof" json:"username,omitempty"`
+	PicturePath   *string                `protobuf:"bytes,4,opt,name=picture_path,json=picturePath,proto3,oneof" json:"picture_path,omitempty"`
+	BirthDate     *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=birth_date,json=birthDate,proto3,oneof" json:"birth_date,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdateProfileInfoRequest) Reset() {
+	*x = UpdateProfileInfoRequest{}
+	mi := &file_user_service_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateProfileInfoRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateProfileInfoRequest) ProtoMessage() {}
+
+func (x *UpdateProfileInfoRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_user_service_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateProfileInfoRequest.ProtoReflect.Descriptor instead.
+func (*UpdateProfileInfoRequest) Descriptor() ([]byte, []int) {
+	return file_user_service_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *UpdateProfileInfoRequest) GetFirstName() string {
+	if x != nil && x.FirstName != nil {
+		return *x.FirstName
+	}
+	return ""
+}
+
+func (x *UpdateProfileInfoRequest) GetLastName() string {
+	if x != nil && x.LastName != nil {
+		return *x.LastName
+	}
+	return ""
+}
+
+func (x *UpdateProfileInfoRequest) GetUsername() string {
+	if x != nil && x.Username != nil {
+		return *x.Username
+	}
+	return ""
+}
+
+func (x *UpdateProfileInfoRequest) GetPicturePath() string {
+	if x != nil && x.PicturePath != nil {
+		return *x.PicturePath
+	}
+	return ""
+}
+
+func (x *UpdateProfileInfoRequest) GetBirthDate() *timestamppb.Timestamp {
+	if x != nil {
+		return x.BirthDate
+	}
+	return nil
+}
+
 var File_user_service_proto protoreflect.FileDescriptor
 
 const file_user_service_proto_rawDesc = "" +
 	"\n" +
-	"\x12user_service.proto\x12\fuser_service\x1a\x1fgoogle/protobuf/timestamp.proto\" \n" +
+	"\x12user_service.proto\x12\fuser_service\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1bgoogle/protobuf/empty.proto\" \n" +
 	"\x0eGetByIDRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\"E\n" +
 	"\x11VerifyUserRequest\x12\x14\n" +
@@ -441,13 +518,28 @@ const file_user_service_proto_rawDesc = "" +
 	"\n" +
 	"birth_date\x18\a \x01(\v2\x1a.google.protobuf.TimestampR\tbirthDate\x122\n" +
 	"\blocation\x18\b \x01(\v2\x16.user_service.LocationR\blocation\x12\x14\n" +
-	"\x05email\x18\t \x01(\tR\x05email2\x8b\x02\n" +
+	"\x05email\x18\t \x01(\tR\x05email\"\xb3\x02\n" +
+	"\x18UpdateProfileInfoRequest\x12\"\n" +
+	"\n" +
+	"first_name\x18\x01 \x01(\tH\x00R\tfirstName\x88\x01\x01\x12 \n" +
+	"\tlast_name\x18\x02 \x01(\tH\x01R\blastName\x88\x01\x01\x12\x1f\n" +
+	"\busername\x18\x03 \x01(\tH\x02R\busername\x88\x01\x01\x12&\n" +
+	"\fpicture_path\x18\x04 \x01(\tH\x03R\vpicturePath\x88\x01\x01\x12>\n" +
+	"\n" +
+	"birth_date\x18\a \x01(\v2\x1a.google.protobuf.TimestampH\x04R\tbirthDate\x88\x01\x01B\r\n" +
+	"\v_first_nameB\f\n" +
+	"\n" +
+	"_last_nameB\v\n" +
+	"\t_usernameB\x0f\n" +
+	"\r_picture_pathB\r\n" +
+	"\v_birth_date2\xe0\x02\n" +
 	"\vUserService\x12=\n" +
 	"\x06Create\x12\x1f.user_service.CreateUserRequest\x1a\x12.user_service.User\x12;\n" +
 	"\aGetByID\x12\x1c.user_service.GetByIDRequest\x1a\x12.user_service.User\x12A\n" +
 	"\n" +
 	"GetByEmail\x12\x1f.user_service.GetByEmailRequest\x1a\x12.user_service.User\x12=\n" +
-	"\x06Verify\x12\x1f.user_service.VerifyUserRequest\x1a\x12.user_service.UserB+Z)github.com/myselfBZ/uchrashuvda-isc/usersb\x06proto3"
+	"\x06Verify\x12\x1f.user_service.VerifyUserRequest\x1a\x12.user_service.User\x12S\n" +
+	"\x11UpdateProfileInfo\x12&.user_service.UpdateProfileInfoRequest\x1a\x16.google.protobuf.EmptyB+Z)github.com/myselfBZ/uchrashuvda-isc/usersb\x06proto3"
 
 var (
 	file_user_service_proto_rawDescOnce sync.Once
@@ -461,34 +553,39 @@ func file_user_service_proto_rawDescGZIP() []byte {
 	return file_user_service_proto_rawDescData
 }
 
-var file_user_service_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
+var file_user_service_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
 var file_user_service_proto_goTypes = []any{
-	(*GetByIDRequest)(nil),        // 0: user_service.GetByIDRequest
-	(*VerifyUserRequest)(nil),     // 1: user_service.VerifyUserRequest
-	(*GetByEmailRequest)(nil),     // 2: user_service.GetByEmailRequest
-	(*Location)(nil),              // 3: user_service.Location
-	(*CreateUserRequest)(nil),     // 4: user_service.CreateUserRequest
-	(*User)(nil),                  // 5: user_service.User
-	(*timestamppb.Timestamp)(nil), // 6: google.protobuf.Timestamp
+	(*GetByIDRequest)(nil),           // 0: user_service.GetByIDRequest
+	(*VerifyUserRequest)(nil),        // 1: user_service.VerifyUserRequest
+	(*GetByEmailRequest)(nil),        // 2: user_service.GetByEmailRequest
+	(*Location)(nil),                 // 3: user_service.Location
+	(*CreateUserRequest)(nil),        // 4: user_service.CreateUserRequest
+	(*User)(nil),                     // 5: user_service.User
+	(*UpdateProfileInfoRequest)(nil), // 6: user_service.UpdateProfileInfoRequest
+	(*timestamppb.Timestamp)(nil),    // 7: google.protobuf.Timestamp
+	(*emptypb.Empty)(nil),            // 8: google.protobuf.Empty
 }
 var file_user_service_proto_depIdxs = []int32{
-	6, // 0: user_service.CreateUserRequest.birth_date:type_name -> google.protobuf.Timestamp
-	3, // 1: user_service.CreateUserRequest.location:type_name -> user_service.Location
-	6, // 2: user_service.User.birth_date:type_name -> google.protobuf.Timestamp
-	3, // 3: user_service.User.location:type_name -> user_service.Location
-	4, // 4: user_service.UserService.Create:input_type -> user_service.CreateUserRequest
-	0, // 5: user_service.UserService.GetByID:input_type -> user_service.GetByIDRequest
-	2, // 6: user_service.UserService.GetByEmail:input_type -> user_service.GetByEmailRequest
-	1, // 7: user_service.UserService.Verify:input_type -> user_service.VerifyUserRequest
-	5, // 8: user_service.UserService.Create:output_type -> user_service.User
-	5, // 9: user_service.UserService.GetByID:output_type -> user_service.User
-	5, // 10: user_service.UserService.GetByEmail:output_type -> user_service.User
-	5, // 11: user_service.UserService.Verify:output_type -> user_service.User
-	8, // [8:12] is the sub-list for method output_type
-	4, // [4:8] is the sub-list for method input_type
-	4, // [4:4] is the sub-list for extension type_name
-	4, // [4:4] is the sub-list for extension extendee
-	0, // [0:4] is the sub-list for field type_name
+	7,  // 0: user_service.CreateUserRequest.birth_date:type_name -> google.protobuf.Timestamp
+	3,  // 1: user_service.CreateUserRequest.location:type_name -> user_service.Location
+	7,  // 2: user_service.User.birth_date:type_name -> google.protobuf.Timestamp
+	3,  // 3: user_service.User.location:type_name -> user_service.Location
+	7,  // 4: user_service.UpdateProfileInfoRequest.birth_date:type_name -> google.protobuf.Timestamp
+	4,  // 5: user_service.UserService.Create:input_type -> user_service.CreateUserRequest
+	0,  // 6: user_service.UserService.GetByID:input_type -> user_service.GetByIDRequest
+	2,  // 7: user_service.UserService.GetByEmail:input_type -> user_service.GetByEmailRequest
+	1,  // 8: user_service.UserService.Verify:input_type -> user_service.VerifyUserRequest
+	6,  // 9: user_service.UserService.UpdateProfileInfo:input_type -> user_service.UpdateProfileInfoRequest
+	5,  // 10: user_service.UserService.Create:output_type -> user_service.User
+	5,  // 11: user_service.UserService.GetByID:output_type -> user_service.User
+	5,  // 12: user_service.UserService.GetByEmail:output_type -> user_service.User
+	5,  // 13: user_service.UserService.Verify:output_type -> user_service.User
+	8,  // 14: user_service.UserService.UpdateProfileInfo:output_type -> google.protobuf.Empty
+	10, // [10:15] is the sub-list for method output_type
+	5,  // [5:10] is the sub-list for method input_type
+	5,  // [5:5] is the sub-list for extension type_name
+	5,  // [5:5] is the sub-list for extension extendee
+	0,  // [0:5] is the sub-list for field type_name
 }
 
 func init() { file_user_service_proto_init() }
@@ -496,13 +593,14 @@ func file_user_service_proto_init() {
 	if File_user_service_proto != nil {
 		return
 	}
+	file_user_service_proto_msgTypes[6].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_user_service_proto_rawDesc), len(file_user_service_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   6,
+			NumMessages:   7,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
