@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+package swipe_service;
+
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/myselfBZ/uchrashuvda-isc/swipe";
+
+
+service SwipeService {
+  rpc GetSwipes(GetSwipesRequest) returns (GetSwipesResponse);
+  rpc Create(CreateSwipeRequest) returns (CreateSwipeResonse);
+};
+
+
+message GetSwipesRequest {
+  string swiper_id = 1;
+  optional string target_id = 2;
+  optional google.protobuf.Timestamp from = 3;
+  optional google.protobuf.Timestamp till = 4;
+}
+
+message GetSwipesResponse {
+  repeated Swipe swipes = 1;
+}
+
+message Swipe {
+  string swiper_id = 1;
+  string target_id = 2;
+  google.protobuf.Timestamp created_at = 3;
+}
+
+message CreateSwipeRequest {
+  string swiper_id = 1;
+  string target_id = 2;
+}
+
+message CreateSwipeResonse {
+  Swipe swipe = 1;
+  bool is_match = 2;
+}
